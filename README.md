@@ -6,7 +6,7 @@ run one command, and you are presenting. No build step. No config file. No frame
 **Try it out**: Copy and paste this into your terminal — no installation required:
 
 ```bash
-npx @tforster/deck0 https://raw.githubusercontent.com/TroyForster/deck0/main/demo/presentation.md
+npx @tforster/deck0 https://raw.githubusercontent.com/tforster/deck0/main/demo/presentation.md
 ```
 
 ## Table of Contents <!-- omit in toc -->
