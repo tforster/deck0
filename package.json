@@ -1,0 +1,42 @@
+{
+  "name": "@tforster/deck0",
+  "version": "0.1.0",
+  "description": "Lean markdown-to-slides presenter. Three dependencies. Zero nonsense.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "deck0": "./dist/deck0.js"
+  },
+  "files": [
+    "dist/deck0.js",
+    "dist/deck0.css",
+    "vendor/mermaid.min.js"
+  ],
+  "scripts": {
+    "start": "node dist/deck0.js demo/presentation.md",
+    "lint": "eslint dist/deck0.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tforster/deck0.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tforster/deck0/issues"
+  },
+  "homepage": "https://github.com/tforster/deck0#readme",
+  "keywords": [
+    "markdown",
+    "slides",
+    "presentation",
+    "cli",
+    "mermaid",
+    "highlight"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "highlight.js": "^11.11.1",
+    "marked": "^15.0.0"
+  }
+}

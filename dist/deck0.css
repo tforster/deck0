@@ -1,0 +1,379 @@
+/* deck0.css — Slide presentation styles
+ *
+ * Dark theme. Full-viewport slides. Pure CSS transitions. No frameworks. No nonsense.
+ */
+
+/* ---------------------------------------------------------------------------
+ * Reset
+ * --------------------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------------------
+ * Deck & Slides
+ * --------------------------------------------------------------------------- */
+
+#deck {
+  position: fixed;
+  inset: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+  /* Off-screen right by default */
+  transform: translateX(100%);
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.slide[data-state="active"] {
+  transform: translateX(0);
+}
+
+.slide[data-state="prev"] {
+  transform: translateX(-100%);
+}
+
+/* Content centred column */
+.slide-content {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Typography
+ * --------------------------------------------------------------------------- */
+
+/* H1 — title/cover slide only; one per presentation */
+.slide-content h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.15em;
+  background: linear-gradient(135deg, #ffffff 60%, #58a6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* H2 — slide title; appears once per slide as its heading */
+.slide-content h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.15em;
+  background: linear-gradient(135deg, #ffffff 60%, #58a6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Inline code inside gradient headings — restore visible colour */
+.slide-content h1 code,
+.slide-content h2 code {
+  -webkit-text-fill-color: #79c0ff;
+}
+
+/* H3 — section heading within a slide */
+.slide-content h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: #58a6ff;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+/* H4 — subsection within a slide */
+.slide-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #79c0ff;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.slide-content p {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: #c9d1d9;
+  margin-bottom: 0.9rem;
+  max-width: 72ch;
+}
+
+/* ---------------------------------------------------------------------------
+ * Lists
+ * --------------------------------------------------------------------------- */
+
+.slide-content ul,
+.slide-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.slide-content li {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #c9d1d9;
+  margin-bottom: 0.4rem;
+}
+
+.slide-content li::marker {
+  color: #58a6ff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Code
+ * --------------------------------------------------------------------------- */
+
+.slide-content code {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+  font-size: 0.88em;
+  background: #161b22;
+  color: #79c0ff;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid #30363d;
+}
+
+.slide-content pre {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  line-height: 1.65;
+}
+
+.slide-content pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ---------------------------------------------------------------------------
+ * Tables
+ * --------------------------------------------------------------------------- */
+
+.slide-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+}
+
+.slide-content th {
+  background: #161b22;
+  color: #58a6ff;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  border: 1px solid #30363d;
+}
+
+.slide-content td {
+  padding: 0.55rem 1rem;
+  border: 1px solid #21262d;
+  color: #c9d1d9;
+  vertical-align: top;
+}
+
+.slide-content tr:nth-child(even) td {
+  background: #0d1117;
+}
+
+.slide-content tr:nth-child(odd) td {
+  background: #161b22;
+}
+
+/* ---------------------------------------------------------------------------
+ * Callouts  (GFM > [!NOTE] etc.)
+ * --------------------------------------------------------------------------- */
+
+.callout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border-left: 4px solid;
+  margin-bottom: 1rem;
+  background: #161b22;
+}
+
+.callout p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #c9d1d9;
+}
+
+.callout-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.callout-note   { border-color: #58a6ff; }
+.callout-note   .callout-label { color: #58a6ff; }
+
+.callout-tip    { border-color: #3fb950; }
+.callout-tip    .callout-label { color: #3fb950; }
+
+.callout-warning { border-color: #d29922; }
+.callout-warning .callout-label { color: #d29922; }
+
+.callout-important { border-color: #a371f7; }
+.callout-important .callout-label { color: #a371f7; }
+
+.callout-caution { border-color: #f85149; }
+.callout-caution .callout-label { color: #f85149; }
+
+/* ---------------------------------------------------------------------------
+ * Slide counter + nav hint
+ * --------------------------------------------------------------------------- */
+
+#counter {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.5rem;
+  font-size: 0.78rem;
+  color: #484f58;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#nav-hint {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  color: #30363d;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  z-index: 100;
+  transition: color 1s;
+}
+
+#nav-hint:hover {
+  color: #484f58;
+}
+
+/* ---------------------------------------------------------------------------
+ * Mermaid diagrams
+ * --------------------------------------------------------------------------- */
+
+.slide-content pre.mermaid {
+  background: transparent;
+  border: none;
+  padding: 0;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.slide-content pre.mermaid svg {
+  /* Let Mermaid set natural width; scale down only if wider than the column */
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* htmlLabels:true wraps node text in <foreignObject><p> — reset slide-content p overrides */
+.slide-content pre.mermaid p {
+  font-size: unset;
+  max-width: none;
+  margin: 0;
+  color: inherit;
+}
+
+
+
+.slide-content blockquote {
+  border-left: 3px solid #30363d;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.9rem;
+  color: #8b949e;
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------------
+ * Horizontal rule
+ * --------------------------------------------------------------------------- */
+
+.slide-content hr {
+  border: none;
+  border-top: 1px solid #21262d;
+  margin: 1.5rem 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * Links
+ * --------------------------------------------------------------------------- */
+
+.slide-content a {
+  color: #58a6ff;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.slide-content a:hover {
+  border-color: #58a6ff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Images
+ * --------------------------------------------------------------------------- */
+
+.slide-content img {
+  max-width: 100%;
+  max-height: 40vh;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Strong / em
+ * --------------------------------------------------------------------------- */
+
+.slide-content strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.slide-content em {
+  color: #8b949e;
+}
